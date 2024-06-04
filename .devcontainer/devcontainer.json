@@ -1,5 +1,5 @@
 {
-  "postStartCommand": "bash postCreateCommand.sh",
+  "postStartCommand": "bash .devcontainer/postCreateCommand.sh",
   "postCreateCommand": "mkdir test2 && pip3 install -r requirements.txt"
 }
 
