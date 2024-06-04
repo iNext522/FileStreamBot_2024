@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 mkdir $(date +%Y%m%d%m%s)
 sudo cloudflared service uninstall
