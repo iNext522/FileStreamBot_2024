@@ -51,18 +51,26 @@ async def gen_link(m: Message, _id, name: list) -> tuple[InlineKeyboardMarkup, s
     page_link = f"{Var.URL}watch/{_id}"
     
     stream_link = f"{Var.URL}dl/{_id}"
-    Stream_Text=lang.STREAM_MSG_TEXT.format(file_name, file_size, stream_link, page_link, name[0], name[1])
-    reply_markup=InlineKeyboardMarkup(
+    Stream_Text = lang.STREAM_MSG_TEXT.format(file_name, file_size, stream_link, page_link, name[0], name[1])
+    reply_markup = InlineKeyboardMarkup(
         [
             [InlineKeyboardButton("🖥STREAM", url=page_link), InlineKeyboardButton("Dᴏᴡɴʟᴏᴀᴅ 📥", url=stream_link)]
-            ]
-        )
+        ]
+    )
+    
+    # Create directory if it doesn't exist
+    os.makedirs("/opt/drive_bkp/STRM_BOT/", exist_ok=True)
+    
     # Create .strm file with the stream link
     strm_file_path = os.path.join("/opt/drive_bkp/STRM_BOT/", f"{file_name}.strm")
     with open(strm_file_path, 'w') as file:
         file.write(stream_link)
+    
+    # Print message once the file is created
+    print(f"Created file: {strm_file_path}")
+    
     return reply_markup, Stream_Text
-
+    
 async def is_user_banned(message, lang) -> bool:
     if await db.is_user_banned(message.from_user.id):
         await message.reply_text(
