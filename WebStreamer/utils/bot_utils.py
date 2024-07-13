@@ -1,5 +1,5 @@
 # This file is a part of FileStreamBot
-
+import os
 from __future__ import annotations
 from pyrogram.errors import UserNotParticipant
 from pyrogram.enums.parse_mode import ParseMode
