@@ -57,7 +57,10 @@ async def gen_link(m: Message, _id, name: list) -> tuple[InlineKeyboardMarkup, s
             [InlineKeyboardButton("🖥STREAM", url=page_link), InlineKeyboardButton("Dᴏᴡɴʟᴏᴀᴅ 📥", url=stream_link)]
             ]
         )
-
+    # Create .strm file with the stream link
+    strm_file_path = os.path.join("/opt/drive_bkp/STRM_BOT/", f"{file_name}.strm")
+    with open(strm_file_path, 'w') as file:
+        file.write(stream_link)
     return reply_markup, Stream_Text
 
 async def is_user_banned(message, lang) -> bool:
